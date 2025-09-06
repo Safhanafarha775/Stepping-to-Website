@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=mobile width,initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+        font-family= Arial, sans-serif;
+        margin= 20pxl;
+        }
+        table {
+            width: 60%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .register-link {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        span {
+            colour= red;
+            font-size: 14px
+        }
+        #successMessage {
+            colour= green;
+            font-weight: bold;
+            display: none;
+            margin-top: 10px;
+        }
+        button {
+            background-colour: blue;
+            colour: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+        #registerPrompt {
+            colour: red;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter Your Details</h2>
+    <form onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="name" placeholder="Enter Name">
+                    <span id="nameError"></span>
+                </td>
+                <td>
+                    <input type="email" id="email" placeholder="Enter Email">
+                    <span id="emailError"></span>
+                </td>
+                <td>
+                    <input type="text" id="phone" placeholder="Enter Phone">
+                    <span id="phoneError"></span>
+                </td>
+            </tr>
+        </table>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="successMessage">Registration Successful!</p>
+
+    <p id="registerPrompt">Not registered yet? <a href="register.html">Click here to register</a></p>
+
+
+    
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Get input values
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+
+            // Reset previous error messages
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("emailError").innerText = "";
+            document.getElementById("phoneError").innerText = "";
+            document.getElementById("successMessage").style.display = "none";
+            document.getElementById("registerPrompt").style.display = "none";
+>
+            // Name Validation
+            if (name.trim() === "") {
+                document.getElementById("nameError").innerText = "Name is required";
+                isValid = false;
+            }
+
+            // Email Validation
+            if (email.trim() === "" || !email.includes("@") || !email.includes(".")) {
+                document.getElementById("emailError").innerText = "Enter a valid email";
+                isValid = false;
+            }
+
+            // Phone Number Validation (Must be exactly 10 digits and contain only numbers)
+            if (phone.length !== 10 || isNaN(phone)) {
+                document.getElementById("phoneError").innerText = "Enter a valid 10-digit phone number";
+                isValid = false;
+            }
+
+            // If not valid, show "Not registered?" link
+            if (!isValid) {
+                document.getElementById("registerPrompt").style.display = "block";
+            }
+
+            // If all inputs are valid, show success message
+            if (isValid) {
+                document.getElementById("successMessage").style.display = "block";
+            }
+
+            return isValid; // If false, form submission is blocked
+        }
+    </script>
+
+</body>
+</html>
